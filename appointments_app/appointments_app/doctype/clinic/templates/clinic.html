@@ -2,6 +2,28 @@
 
 {% block page_content %}
 <h1>{{ title |e }}</h1>
+
+<p><strong>Address</strong></p>
+<p>{{ doc.address }}</p>
+
+<p><strong>Phone</strong></p>
+<p>{{ doc.contact_number }}</p>
+
+
+{% set doctor = frappe.get_doc("Doctor", doc.doctor) %}
+<p><strong>Phone</strong></p>
+<p>{{ doctor.full_name}}</p>
+
+<p><strong>Timings</strong></p>
+<ul>
+{%for shift in doctor.shifts %}
+    <li>{{shift.start_time}} - {{shift.end_time}}</li>
+{% endfor %}
+</ul>
+
+<a href="#" class="btn btn-info">Book Appointment</a>
+
+
 {% endblock %}
 
 <!-- this is a sample default web page template -->
